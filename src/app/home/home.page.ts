@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validator, Validators, FormControlName } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  constructor(private fb: FormBuilder) {}
 
-  constructor() {}
-
+  form: FormGroup;
+  ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+  submit() {
+    console.log('Form is submitting');
+  }
 }
