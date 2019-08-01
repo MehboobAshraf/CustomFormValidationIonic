@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { LibInputPage } from '../lib-input/lib-input.page';
+import { LibInputPageModule } from '../lib-input/lib-input.module';
 
 @NgModule({
   imports: [
@@ -12,6 +14,7 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    LibInputPageModule,
     RouterModule.forChild([
       {
         path: '',
@@ -19,6 +22,8 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+
+  entryComponents: []
 })
 export class HomePageModule {}

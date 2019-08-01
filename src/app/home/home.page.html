@@ -8,9 +8,11 @@
 
 <ion-content>
   <form [formGroup]="form" (submit)="submit()">
-    <ion-item>
-      <ion-input formControlName="name"></ion-input>
-      <ion-input formControlName="password"></ion-input>
-    </ion-item>
+    <app-lib-input [FormControlName]="name" [form]="form" placeholder="enter username" type="text" username="userName"></app-lib-input>
+    <ion-input formControlName="password" placeholder="password"></ion-input>
+    <!-- <ion-input formControlName="name"></ion-input> -->
+    <ion-button type="submit">
+      Click me
+    </ion-button>
   </form>
 </ion-content>

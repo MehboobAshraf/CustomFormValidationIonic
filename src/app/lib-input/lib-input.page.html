@@ -1,3 +1,6 @@
-<i-item>
-  <ion-input #input type="text" placeholder="Awesome Input"></ion-input>
-</i-item>
+<!-- <ion-item> -->
+<ng-container [formGroup]="form">
+  <ion-input [type]="type" [placeholder]="placeholder" [formControlName]="FormControlName" [name]="username"></ion-input>
+</ng-container>
+
+<!-- </ion-item> -->
