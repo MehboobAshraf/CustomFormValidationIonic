@@ -15,8 +15,13 @@ export class HomePage implements OnInit {
       name: ['', Validators.required],
       password: ['', Validators.required]
     });
+    // this.name.disable();
   }
   submit() {
     console.log('Form is submitting');
+  }
+
+  get name() {
+    return this.form.get('name');
   }
 }

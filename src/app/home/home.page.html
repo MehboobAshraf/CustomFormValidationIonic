@@ -8,11 +8,12 @@
 
 <ion-content>
   <form [formGroup]="form" (submit)="submit()">
-    <app-lib-input [FormControlName]="name" [form]="form" placeholder="enter username" type="text" username="userName"></app-lib-input>
+    <app-lib-input [control]="name" placeholder="enter username" type="text" username="userName"></app-lib-input>
     <ion-input formControlName="password" placeholder="password"></ion-input>
     <!-- <ion-input formControlName="name"></ion-input> -->
     <ion-button type="submit">
       Click me
     </ion-button>
   </form>
+  <pre>{{ form.value | json }}</pre>
 </ion-content>

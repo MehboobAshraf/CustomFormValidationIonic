@@ -10,18 +10,28 @@ import {
   ChangeDetectorRef,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { ControlValueAccessor, NgControl, FormGroup } from '@angular/forms';
+import { ControlValueAccessor, NgControl, FormGroup, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'app-lib-input',
   templateUrl: './lib-input.page.html',
   styleUrls: ['./lib-input.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: LibInputPage,
+      multi: true
+    }
+  ]
 })
 export class LibInputPage implements ControlValueAccessor, OnInit {
-  constructor(@Optional() @Self() public control: NgControl, private cd: ChangeDetectorRef) {
-    control.valueAccessor = this;
+  value: any;
+  onTouched: any;
+  onChange: () => any;
+  constructor(private cd: ChangeDetectorRef) {
+    // control.valueAccessor = this;
   }
 
   // onChange: any = () => {};
@@ -33,17 +43,25 @@ export class LibInputPage implements ControlValueAccessor, OnInit {
   //     this.onTouch(val);
   //   }
   // }
-  @Input() form: FormGroup;
-  @Input() username: string;
-  @Input() FormControlName: string;
+  @Input() control: FormControl;
   @Input() placeholder: string;
   @Input() type: string;
-  writeValue(value: any): void {}
-  registerOnChange(fn: any): void {}
-  registerOnTouched(fn: any): void {}
-  setDisabledState?(isDisabled: boolean): void {}
+  writeValue(value: any): void {
+    this.value = value;
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  change($event) {
+    console.log($event);
+  }
+  // setDisabledState?(isDisabled: boolean): void {}
 
   ngOnInit() {
-    this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => this.cd.detectChanges());
+    // this.control.statusChanges.pipe(untilDestroyed(this)).subscribe(() => this.cd.detectChanges());
   }
 }
